@@ -1,0 +1,24 @@
+- name: Install docker.io
+  apt:
+    name: docker.io
+    update_cache: yes
+
+- name: Create docker directory
+  file:
+    path: "{{ user_home }}/docker"
+    owner: "{{ user_name }}"
+    group: docker
+    mode: 0550
+    state: directory
+
+- name: Add user to docker group
+  user:
+    name: "{{ user_name }}"
+    groups: docker
+    append: yes
+
+- name: Copy docker.service
+  copy:
+    src: ./lib/systemd/system/docker.service
+    dest: /lib/systemd/system/docker.service
+    group: docker
