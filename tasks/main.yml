@@ -5,15 +5,15 @@
 
 - name: Create docker directory
   file:
-    path: "{{ user_home }}/docker"
-    owner: "{{ user_name }}"
+    path: "{{ user.home }}/docker"
+    owner: "{{ user.name }}"
     group: docker
     mode: 0550
     state: directory
 
 - name: Add user to docker group
   user:
-    name: "{{ user_name }}"
+    name: "{{ user.name }}"
     groups: docker
     append: yes
 
